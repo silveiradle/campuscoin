@@ -30,8 +30,9 @@ export default function LoginPage() {
 
             if (response.ok) {
                 const data = await response.json();
+                console.log(`User ID: ${data.user.id}`);
                 setLoading(false);
-                login(data.token);
+                login(data.token, data.user);
                 navigate('/home');
             } else {
                 const errorData = await response.json();

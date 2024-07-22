@@ -17,7 +17,7 @@ const PrivateRoute = () => {
                 const response = await fetch('http://localhost:3001/api/auth/verify-token', {
                     headers: {
                         'x-access-token': token,
-                    }
+                    },
                 });
 
                 if (response.ok) {
