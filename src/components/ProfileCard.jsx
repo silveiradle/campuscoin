@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import ProfilePage from '../pages/Profile/Main';
 
 export default function ProfileCard() {
     const { userData, logout } = useContext(AuthContext);
@@ -32,7 +33,7 @@ export default function ProfileCard() {
             }
 
             {isOpen && <ul className="w-full duration-300 bg-blue-50 shadow-md rounded-xl absolute top-14 right-0 z-50">
-                <Link className='bg-blue-50 w-full text-start px-4 py-2 flex hover:bg-white duration-200'>
+                <Link to='profile' className='bg-blue-50 w-full text-start px-4 py-2 flex hover:bg-white duration-200'>
                     Perfil
                 </Link>
                 <button

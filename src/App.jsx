@@ -3,9 +3,10 @@ import './App.css';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import Register from './pages/Register';
+import LoadingPage from './pages/Loading';
 import { AuthProvider } from '../src/AuthContext';
 import PrivateRoute from '../src/PrivateRoute';
-import TestPage from './pages/Teste';
+import ProfilePage from './pages/Profile/Main';
 
 function App() {
   return (
@@ -14,9 +15,10 @@ function App() {
         <Routes>
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
+          <Route path='/loading' element={<LoadingPage />} />
           <Route path='/' element={<PrivateRoute />}>
-            <Route path='home' element={<Home />} />
-            <Route path='teste' element={<TestPage />} />
+            <Route index element={<Home />} />
+            <Route path='profile' element={<ProfilePage />} />
           </Route>
         </Routes>
       </BrowserRouter>

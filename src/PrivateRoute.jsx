@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
+import LoadingPage from './pages/Loading';
 
 const PrivateRoute = () => {
     const [isAuthenticated, setAuthenticated] = useState(null);
@@ -14,7 +15,8 @@ const PrivateRoute = () => {
 
         const verifyToken = async () => {
             try {
-                const response = await fetch('http://localhost:3001/api/auth/verify-token', {
+                // Trocar de localhost para IP Publico
+                const response = await fetch('http://localhost:3000/api/auth/verify-token', {
                     headers: {
                         'x-access-token': token,
                     },
@@ -34,7 +36,7 @@ const PrivateRoute = () => {
     }, []);
 
     if (isAuthenticated === null) {
-        return <div>Loading...</div>;
+        return <LoadingPage />
     }
 
     return isAuthenticated ? <Outlet /> : <Navigate to='/login' />;
