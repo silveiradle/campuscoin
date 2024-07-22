@@ -1,7 +1,10 @@
 import React, { useContext, useState } from 'react';
 import { AuthContext } from '../AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
-import ProfilePage from '../pages/Profile/Main';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { profileMenus } from '../../menus';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import ProfileCardMenu from './ProfileCardMenu';
+import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
 
 export default function ProfileCard() {
     const { userData, logout } = useContext(AuthContext);
@@ -18,30 +21,34 @@ export default function ProfileCard() {
     return (
         <div
             onClick={() => setOpen(!isOpen)}
-            className="border-[1px] border-blue-100 hover:bg-white duration-300 rounded-md px-4 py-2 relative cursor-pointer">
-
+            className="hover:bg-blue-400 hover:text-white text-gray-500 duration-200 rounded-md px-4 py-2 relative cursor-pointer">
             {
                 userData ?
                     <div className="flex flex-row space-x-2 items-center">
                         <div id="avatar" className="h-8 w-8 bg-gray-200 rounded-full"></div>
-                        <p className="text-[#02213C] text-sm font-bold">
+                        <p className="text-sm font-bold">
                             {userData.name}
                         </p>
                     </div>
                     :
                     <p className='text-sm text-gray-400 animate-pulse'>Carregando...</p>
             }
+            {
+                isOpen && <ul
+                    onMouseLeave={() => setOpen(!isOpen)}
+                    className="w-full duration-200 bg-white shadow-md rounded-md absolute top-14 right-0 z-50 p-2">
+                    {
+                        profileMenus.map((menu, index) => <ProfileCardMenu key={index} menu={menu} />)
+                    }
 
-            {isOpen && <ul className="w-full duration-300 bg-blue-50 shadow-md rounded-xl absolute top-14 right-0 z-50">
-                <Link to='profile' className='bg-blue-50 w-full text-start px-4 py-2 flex hover:bg-white duration-200'>
-                    Perfil
-                </Link>
-                <button
-                    onClick={() => handleLogout()}
-                    className='bg-blue-50 w-full text-start px-4 py-2 hover:bg-red-400 hover:text-white duration-200'>
-                    Sair
-                </button>
-            </ul>}
+                    <button
+                        onClick={() => handleLogout()}
+                        className='w-full flex flex-row items-center justify-start px-4 py-2 space-x-2 text-gray-600 hover:text-white hover:bg-red-400 duration-200 rounded-sm'>
+                        <FontAwesomeIcon icon={faRightFromBracket} />
+                        <p>Sair</p>
+                    </button>
+                </ul>
+            }
 
         </div>
     );
