@@ -1,19 +1,92 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import CustomInput from '../../components/CustomInput';
 import { AuthContext } from '../../AuthContext';
 import PrimaryButton from '../../components/PrimaryButton';
 import Label from '../../components/Label';
-
+import Heading from '../../components/Heading';
 
 export default function AccountPage() {
-    const [newPassword, setNewPassword] = useState(null);
-    const [confirmNewPassword, setConfirmNewPassword] = useState(null);
     const { userData } = useContext(AuthContext);
+    const [isValidPassword, setValidPassword] = useState(false);
+    const [message, setMessage] = useState(null);
+    const [formData, setFormData] = useState({
+        password: '',
+        newPassword: '',
+        confirmPassword: '',
+    });
+    const formRef = useRef(null);
+
+    useEffect(() => {
+
+        if (formData.newPassword !== null && formData.confirmPassword !== null) {
+            if (formData.newPassword !== formData.confirmPassword) {
+                setMessage('As senhas não coincidem');
+                setValidPassword(false);
+            } else {
+                setValidPassword(true);
+                setMessage(null);
+            }
+        } else {
+            setMessage(null);
+            setValidPassword(false);
+        }
+
+    }, [formData.password, formData.newPassword, formData.confirmPassword]);
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleResetForm = () => {
+        const formData = new FormData(formRef.current);
+        setFormData({
+            password: '',
+            newPassword: '',
+            confirmPassword: '',
+        });
+
+        formRef.current.reset();
+    };
+
+    const handleChangePassword = async (e) => {
+        e.preventDefault();
+        const userId = userData.id;
+        const password = formData.password;
+        const newPassword = formData.newPassword;
+
+        try {
+            const response = await fetch('http://localhost:3000/api/auth/change-password', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userId,
+                    password,
+                    newPassword,
+                })
+            });
+
+            if (response.ok) {
+                console.log('Troca de senha realizada com sucesso!');
+                handleResetForm();
+            } else {
+                console.log('Erro ao trocar a senha!');
+            }
+        } catch (error) {
+            console.error(`Erro: ${error}`);
+        }
+    }
 
     return (
         <div className='flex flex-col space-y-4'>
 
-            <p className='font-semibold text-gray-500'>Dados da conta</p>
+            <Heading>
+                Minha conta
+            </Heading>
 
             <hr />
 
@@ -23,30 +96,55 @@ export default function AccountPage() {
             <Label htmlFor="email">Confirme a nova senha</Label>
             <CustomInput id='email' type='email' value={userData.email} readOnly={true} />
 
-            <p className='font-semibold text-gray-500'>Troca de senha</p>
+            <Heading>
+                Troca de senha
+            </Heading>
 
             <hr />
 
-            <form className='flex flex-col space-y-4'>
+            <form
+                ref={formRef}
+                onSubmit={handleChangePassword}
+                className='flex flex-col space-y-4'>
 
-                <Label htmlFor="password">Nova senha</Label>
+                <Label htmlFor="old-password">Senha atual</Label>
                 <CustomInput
-                    id='password'
+                    id='old-password'
                     type="password"
+                    name="password"
+                    onChange={handleChange}
+                />
+
+                <Label htmlFor="new-password">Nova senha</Label>
+                <CustomInput
+                    id='new-password'
+                    type="password"
+                    name="newPassword"
+                    onChange={handleChange}
                 />
 
                 <Label htmlFor="confirm-password">Confirme a nova senha</Label>
                 <CustomInput
                     id='confirm-password'
                     type="password"
+                    name="confirmPassword"
+                    onChange={handleChange}
                 />
+
+                {
+                    formData.newPassword !== formData.confirmPassword &&
+                    <p className="bg-red-200 text-red-600 px-2 py-2 rounded-md">
+                        {message}
+                    </p>
+                }
+
+                <PrimaryButton
+                    type="submit"
+                    disabled={!isValidPassword || formData.password === '' || formData.newPassword === '' || formData.confirmPassword === ''}>
+                    Trocar senha
+                </PrimaryButton>
             </form>
 
-            <PrimaryButton>
-                Trocar senha
-            </PrimaryButton>
-
-
-        </div>
+        </div >
     );
 };
