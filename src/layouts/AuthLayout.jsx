@@ -1,8 +1,8 @@
 import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import Carousel from '../components/Actions/AnimatedCarrousel'
 import { useLocation } from 'react-router-dom';
-import ValuesCarroussel from '../components/ValuesCarroussel/ValuesCarroussel';
 
 export default function AuthLayout({ children, title }) {
     const location = useLocation();
@@ -11,7 +11,9 @@ export default function AuthLayout({ children, title }) {
 
             <Navbar />
 
-            {(location.pathname == '/') && <ValuesCarroussel />}
+            {
+                location.pathname === '/' && <Carousel />
+            }
 
             <div className="grid grid-cols-12">
 

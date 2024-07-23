@@ -41,7 +41,6 @@ export default function AccountPage() {
     };
 
     const handleResetForm = () => {
-        const formData = new FormData(formRef.current);
         setFormData({
             password: '',
             newPassword: '',
