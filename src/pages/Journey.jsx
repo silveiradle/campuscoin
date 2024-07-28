@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import Navbar from '../components/Navbar';
 import { AuthContext } from '../AuthContext';
 import Banner from '../components/Banner';
+import Card from '../components/Card';
 
 export default function JourneyPage() {
     const { userData } = useContext(AuthContext);
@@ -43,6 +44,7 @@ export default function JourneyPage() {
                         <p className="text-lg text-gray-400">Todas jornadas</p>
 
                         <div className="flex flex-row lg:overflow-x-scroll bg-gray-200 p-4 gap-4 justify-start flex-wrap lg:flex-nowrap">
+
 
                         </div>
 

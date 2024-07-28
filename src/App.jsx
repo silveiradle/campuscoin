@@ -7,6 +7,8 @@ import LoadingPage from './pages/Loading';
 import { AuthProvider } from '../src/AuthContext';
 import PrivateRoute from '../src/PrivateRoute';
 import ProfilePage from './pages/Profile/Main';
+import ContentHubPage from './pages/ContentHub';
+import JourneyPage from './pages/Journey';
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path='/' element={<PrivateRoute />}>
             <Route index element={<Home />} />
             <Route path='profile' element={<ProfilePage />} />
+            <Route path='content-hub' element={<ContentHubPage />} />
+            <Route path='journey' element={<JourneyPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

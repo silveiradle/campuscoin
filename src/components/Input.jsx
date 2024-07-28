@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function CustomInput({ className, value, onChange, readOnly, ...props }) {
+export default function Input({ className, value, onChange, readOnly, ...props }) {
 
     return (
         <input

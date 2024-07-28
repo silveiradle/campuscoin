@@ -1,9 +1,9 @@
 import React, { useContext, useState } from 'react';
-import CustomInput from '../components/CustomInput'; 
+import Input from '../components/Input';
 import Card from '../components/Card';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../AuthContext';
-import PrimaryButton from '../components/PrimaryButton';
+import Button from '../components/Button';
 
 export default function LoginPage() {
     const [email, setEmail] = useState('');
@@ -55,17 +55,17 @@ export default function LoginPage() {
 
                 <form onSubmit={handleLogin} className='flex flex-col space-y-2'>
                     <label htmlFor="email">Email</label>
-                    <CustomInput type='email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
+                    <Input type='email' name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
                     <label htmlFor="password">Senha</label>
-                    <CustomInput type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
+                    <Input type='password' name='password' value={password} onChange={(e) => setPassword(e.target.value)} />
 
-                    <PrimaryButton
+                    <Button
                         type='submit'
                         disabled={loading}
                         className={`$loading ?? 'bg-gray-600 text-gray-900`}>
                         {loading ? 'Aguarde...' : 'Acessar'}
-                    </PrimaryButton>
+                    </Button>
 
                     <hr />
 

@@ -8,12 +8,12 @@ export default function HomePage() {
     const { userData } = useContext(AuthContext);
 
     const cardOptions = [
-        { title: 'Content Hub', path: '/', description: 'Videos com conteudos educativos sobre finanças.', image: 'card1.png' },
+        { title: 'Content Hub', path: 'content-hub', description: 'Videos com conteudos educativos sobre finanças.', image: 'card1.png' },
         { title: 'Calculadora', path: '/', description: 'Uma calculadora que tambem calcula impostos.', image: 'card2.png' },
         { title: 'Newsletter', path: '/', description: 'Noticias sobre o mundo do investimento e afim.', image: 'card3.png' },
         { title: 'Bolsa de valores', path: '/', description: 'Acesse as cotações das ações brasileiras.', image: 'card4.png' },
-        { title: 'Minhas jornadas', path: '/', description: 'Confira os detalhes sobre a suas Jornadas.', image: 'card5.png ' },
-    ]
+        { title: 'Minhas jornadas', path: '/journey', description: 'Confira os detalhes sobre a suas Jornadas.', image: 'card5.png ' },
+    ];
 
     return (
         <AuthLayout title={'Olá, Leandro!'}>
@@ -26,6 +26,7 @@ export default function HomePage() {
                     <br />
                     Sabemos que a vida acadêmica pode ser desafiadora, e queremos facilitar sua jornada financeira com ferramentas práticas e informações valiosas.
                 </p>
+
             </span>
 
             <hr />

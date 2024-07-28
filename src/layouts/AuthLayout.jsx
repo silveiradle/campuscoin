@@ -7,13 +7,11 @@ import { useLocation } from 'react-router-dom';
 export default function AuthLayout({ children, title }) {
     const location = useLocation();
     return (
-        <div className="w-full min-h-screen bg-blue-50">
+        <div className="w-full min-h-screen bg-blue-50 relative">
 
             <Navbar />
 
-            {
-                location.pathname === '/' && <Carousel />
-            }
+            {location.pathname === '/' && <Carousel />}
 
             <div className="grid grid-cols-12">
 
@@ -36,9 +34,7 @@ export default function AuthLayout({ children, title }) {
 
             </div>
 
-            <Footer>
-
-            </Footer>
+            <Footer />
 
         </div>
     );

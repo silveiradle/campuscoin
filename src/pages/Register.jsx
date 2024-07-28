@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import CustomInput from '../components/CustomInput';
-import PrimaryButton from '../components/PrimaryButton';
+import Input from '../components/Input';
+import Button from '../components/Button';
 import Card from '../components/Card';
 import { useNavigate } from 'react-router-dom';
 
@@ -50,23 +50,23 @@ export default function LoginPage() {
                 <form onSubmit={handleRegister} className='flex flex-col space-y-2'>
 
                     <label htmlFor="name">Nome</label>
-                    <CustomInput type='text' onChange={(e) => setName(e.target.value)} />
+                    <Input type='text' onChange={(e) => setName(e.target.value)} />
 
                     <label htmlFor="email">Email</label>
-                    <CustomInput type='email' onChange={(e) => setEmail(e.target.value)} />
+                    <Input type='email' onChange={(e) => setEmail(e.target.value)} />
 
                     <label htmlFor="password">Senha</label>
-                    <CustomInput type='password' onChange={(e) => setPassword(e.target.value)} />
+                    <CustomIInputnput type='password' onChange={(e) => setPassword(e.target.value)} />
 
                     <label htmlFor="passwordConfirm">Confirme a senha</label>
-                    <CustomInput type='password' onChange={(e) => setPasswordConfirm(e.target.value)} />
+                    <Input type='password' onChange={(e) => setPasswordConfirm(e.target.value)} />
 
-                    <PrimaryButton
+                    <Button
                         type='submit'
                         disabled={loading}
                         className={loading ?? 'bg-gray-600 text-gray-900'}>
                         {loading ? 'Aguarde...' : 'Registrar'}
-                    </PrimaryButton>
+                    </Button>
                 </form>
 
                 {message && <p className="text-red-500">{message}</p>}

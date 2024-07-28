@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
-import CustomInput from '../../components/CustomInput';
+import Input from '../../components/Input';
 import { AuthContext } from '../../AuthContext';
-import PrimaryButton from '../../components/PrimaryButton';
+import Button from '../../components/Button';
 import Label from '../../components/Label';
 import Heading from '../../components/Heading';
 
@@ -90,10 +90,10 @@ export default function AccountPage() {
             <hr />
 
             <Label htmlFor="name">Confirme a nova senha</Label>
-            <CustomInput id='name' value={userData.name} readOnly={true} />
+            <Input id='name' value={userData.name} readOnly={true} />
 
             <Label htmlFor="email">Confirme a nova senha</Label>
-            <CustomInput id='email' type='email' value={userData.email} readOnly={true} />
+            <Input id='email' type='email' value={userData.email} readOnly={true} />
 
             <Heading>
                 Troca de senha
@@ -107,7 +107,7 @@ export default function AccountPage() {
                 className='flex flex-col space-y-4'>
 
                 <Label htmlFor="old-password">Senha atual</Label>
-                <CustomInput
+                <Input
                     id='old-password'
                     type="password"
                     name="password"
@@ -115,7 +115,7 @@ export default function AccountPage() {
                 />
 
                 <Label htmlFor="new-password">Nova senha</Label>
-                <CustomInput
+                <Input
                     id='new-password'
                     type="password"
                     name="newPassword"
@@ -123,7 +123,7 @@ export default function AccountPage() {
                 />
 
                 <Label htmlFor="confirm-password">Confirme a nova senha</Label>
-                <CustomInput
+                <Input
                     id='confirm-password'
                     type="password"
                     name="confirmPassword"
@@ -137,11 +137,11 @@ export default function AccountPage() {
                     </p>
                 }
 
-                <PrimaryButton
+                <Button
                     type="submit"
                     disabled={!isValidPassword || formData.password === '' || formData.newPassword === '' || formData.confirmPassword === ''}>
                     Trocar senha
-                </PrimaryButton>
+                </Button>
             </form>
 
         </div >
