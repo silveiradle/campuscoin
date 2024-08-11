@@ -39,7 +39,7 @@ export default function LoginPage() {
                 setMessage('Error ao se registrar');
             }
         } catch (error) {
-            setMessage(`Erro: ${error}`);
+            setMessage(error.message);
         }
     }
 
@@ -47,6 +47,9 @@ export default function LoginPage() {
         <div className="w-full min-h-screen flex flex-col items-center justify-center bg-slate-900">
 
             <Card title={"Registre-se"}>
+
+                {message && <p className='px-4 py-2 bg-red-100 text-red-700 rounded-md'>{message}</p>}
+
                 <form onSubmit={handleRegister} className='flex flex-col space-y-2'>
 
                     <label htmlFor="name">Nome</label>
@@ -56,7 +59,7 @@ export default function LoginPage() {
                     <Input type='email' onChange={(e) => setEmail(e.target.value)} />
 
                     <label htmlFor="password">Senha</label>
-                    <CustomIInputnput type='password' onChange={(e) => setPassword(e.target.value)} />
+                    <Input type='password' onChange={(e) => setPassword(e.target.value)} />
 
                     <label htmlFor="passwordConfirm">Confirme a senha</label>
                     <Input type='password' onChange={(e) => setPasswordConfirm(e.target.value)} />
@@ -69,7 +72,6 @@ export default function LoginPage() {
                     </Button>
                 </form>
 
-                {message && <p className="text-red-500">{message}</p>}
             </Card>
 
         </div>

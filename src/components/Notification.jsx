@@ -9,7 +9,7 @@ export default function Notification({ notificationData, duration = 5000, onEnd 
         getColorByStatus(notificationData.type);
         const hiddenMsg = setTimeout(() => {
             setAppearing(false);
-            onEnd();
+            { onEnd && onEnd(); }
         }, duration);
     }, []);
 
@@ -26,7 +26,7 @@ export default function Notification({ notificationData, duration = 5000, onEnd 
     }
 
     return (
-        <div className={`fixed right-4 p-4 bottom-4 shadow-xl border-[1px] ${color} transform transition-transform duration-1000 ease-in-out ${isAppear ? 'translate-x-0' : 'translate-x-full -right-8'} rounded-md`}>
+        <div className={`fixed right-4 p-4 bottom-4 shadow-xl border-[1px] ${color} transform transition-transform duration-1000 ease-in-out ${isAppear ? 'translate-x-0' : 'translate-x-full -right-24'} rounded-md`}>
             {notificationData.message}
         </div>
     );

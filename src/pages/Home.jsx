@@ -12,7 +12,7 @@ export default function HomePage() {
         { title: 'Calculadora', path: '/', description: 'Uma calculadora que tambem calcula impostos.', image: 'card2.png' },
         { title: 'Newsletter', path: '/', description: 'Noticias sobre o mundo do investimento e afim.', image: 'card3.png' },
         { title: 'Bolsa de valores', path: '/', description: 'Acesse as cotações das ações brasileiras.', image: 'card4.png' },
-        { title: 'Minhas jornadas', path: '/journey', description: 'Confira os detalhes sobre a suas Jornadas.', image: 'card5.png ' },
+        { title: 'Minhas jornadas', path: '/journey-hub', description: 'Confira os detalhes sobre a suas Jornadas.', image: 'card5.png ' },
     ];
 
     return (

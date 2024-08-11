@@ -1,3 +1,5 @@
+import { apiUrl } from '../utils/constants';
+
 export function getCurrentDateTime() {
     const now = new Date();
 
@@ -10,4 +12,20 @@ export function getCurrentDateTime() {
     const seconds = String(now.getSeconds()).padStart(2, '0');
 
     return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+}
+
+
+export const handleFetch = async ({ endPoint, method, body }) => {
+    const token = localStorage.getItem('token');
+
+    const response = await fetch(`${apiUrl}/${endPoint}`, {
+        method: method,
+        headers: {
+            'Content-Type': 'application/json',
+            'x-access-token': token,
+        },
+        body: JSON.stringify(body),
+    });
+
+    return response;
 }

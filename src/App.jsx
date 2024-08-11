@@ -8,6 +8,7 @@ import { AuthProvider } from '../src/AuthContext';
 import PrivateRoute from '../src/PrivateRoute';
 import ProfilePage from './pages/Profile/Main';
 import ContentHubPage from './pages/ContentHub';
+import JourneyHubPage from './pages/JourneyHub';
 import JourneyPage from './pages/Journey';
 
 function App() {
@@ -22,7 +23,8 @@ function App() {
             <Route index element={<Home />} />
             <Route path='profile' element={<ProfilePage />} />
             <Route path='content-hub' element={<ContentHubPage />} />
-            <Route path='journey' element={<JourneyPage />} />
+            <Route path='journey-hub' element={<JourneyHubPage />} />
+            <Route path='journey/stages/:id' element={<JourneyPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
