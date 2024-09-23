@@ -5,6 +5,7 @@ import { profileMenus } from '../../menus';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import ProfileCardMenu from './ProfileCardMenu';
 import { faRightFromBracket } from '@fortawesome/free-solid-svg-icons';
+import { FirstLetterUppercase } from '../utils/helpers';
 
 export default function ProfileCard() {
     const { userData, logout } = useContext(AuthContext);
@@ -27,7 +28,7 @@ export default function ProfileCard() {
                     <div className="flex flex-row space-x-2 items-center">
                         <div id="avatar" className="h-8 w-8 bg-gray-200 rounded-full"></div>
                         <p className="text-sm font-bold">
-                            {userData.name}
+                            {FirstLetterUppercase(userData.name)}
                         </p>
                     </div>
                     :

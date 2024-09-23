@@ -12,6 +12,7 @@ export default function LoginPage() {
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
     const { login } = useContext(AuthContext);
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
     const handleLogin = async (e) => {
         e.preventDefault();
@@ -21,7 +22,7 @@ export default function LoginPage() {
 
         try {
             // Trocar de localhost para IP Publico
-            const response = await fetch('http://localhost:3000/api/auth/login', {
+            const response = await fetch(`${baseUrl}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -48,8 +49,9 @@ export default function LoginPage() {
     return (
         <div className="w-full min-h-screen flex flex-col items-center justify-center bg-slate-900">
             <Card title={"Acesse a plataforma"}>
+
                 {message &&
-                    <p className='flex items-center justify-center py-2 text-sm bg-red-200 text-red-900 rounded-md'>
+                    <p className='flex px-4 py-2 text-sm bg-red-200 text-red-900 rounded-md'>
                         {message}
                     </p>}
 

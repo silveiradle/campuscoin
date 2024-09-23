@@ -6,6 +6,9 @@ import { useLocation } from 'react-router-dom';
 
 export default function AuthLayout({ children, title }) {
     const location = useLocation();
+
+
+    
     return (
         <div className="w-full min-h-screen bg-blue-50 relative">
 

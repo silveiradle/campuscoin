@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
 import { AuthContext } from '../AuthContext';
 import AuthLayout from '../layouts/AuthLayout';
 import Notification from '../components/Notification';
@@ -7,7 +6,7 @@ import { handleFetch } from '../utils/helpers';
 import Heading from '../components/Heading';
 import JourneyCard from '../components/JourneyCard';
 import Banner from '../components/Banner';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 export default function JourneyHubPage() {
     const [message, setMessage] = useState(null);
@@ -22,11 +21,23 @@ export default function JourneyHubPage() {
     useEffect(() => {
         fetchAllJourneys();
         fetchUserJourneys();
+        fetchUserData();
     }, []);
 
     useEffect(() => {
         handleFixList();
     }, [journeys, userJourneys]);
+
+    const fetchUserData = async () => {
+        const response = await handleFetch({ endPoint: `common/user/${userData.id}`, method: 'GET' });
+
+        if (response.ok) {
+            const data = response.json();
+            console.log(`DEBUG: retorno do usuário id ${userData.id} ${JSON.stringify(data)}`);
+        } else {
+            console.log('DEBUG: Error ao tentar acessar usuário');
+        }
+    }
 
     const fetchAllJourneys = async () => {
         const response = await handleFetch({ endPoint: 'journey/all', method: 'GET' });
@@ -66,7 +77,6 @@ export default function JourneyHubPage() {
 
         setListOne(listOneTemp);
         setListTwo(listTwoTemp);
-
     };
 
     const isJourneyCompleted = (id) => userJourneys.some(uj => uj.journey_id === id && uj.completed);
@@ -102,10 +112,6 @@ export default function JourneyHubPage() {
         }
     }
 
-    const redirectUserToJourneyPage = (journey) => {
-        // Code
-    }
-
     return (
         <AuthLayout>
             {message && <Notification notificationData={message} />}
@@ -113,16 +119,24 @@ export default function JourneyHubPage() {
             <Banner />
 
             <div className="col-span-6 p-4 flex flex-col space-y-4">
-                
+
                 <Heading>Minhas jornadas</Heading>
 
                 <div className="bg-gray-100 rounded-md flex flex-row gap-4 p-4 flex-wrap items-center justify-center md:justify-start">
                     {
                         listOne.length > 0 ?
                             listOne.map((j) =>
-                                <JourneyCard key={j.id} journeyData={j} active={true} completed={isJourneyCompleted(j.id)} onClick={() => navigate(`/journey/stages/${j.id}`)} />
+                                <JourneyCard
+                                    key={j.id}
+                                    journeyData={j}
+                                    active={true}
+                                    completed={isJourneyCompleted(j.id)}
+                                    onClick={() => navigate(`/journey/${j.id}`)}
+                                />
                             ) :
-                            <p className='text-gray-400'>Nenhuma jornada disponível.</p>
+                            <p className='text-gray-400'>
+                                Nenhuma jornada disponível.
+                            </p>
                     }
                 </div>
 

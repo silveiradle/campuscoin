@@ -1,6 +1,7 @@
-import { apiUrl } from '../utils/constants';
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 export function getCurrentDateTime() {
+
     const now = new Date();
 
     const year = now.getFullYear();
@@ -15,12 +16,12 @@ export function getCurrentDateTime() {
 }
 
 
-export const handleFetch = async ({ endPoint, method, body }) => {
+export const handleFetch = async ({ endPoint, method, body, headers }) => {
     const token = localStorage.getItem('token');
 
-    const response = await fetch(`${apiUrl}/${endPoint}`, {
+    const response = await fetch(`${baseUrl}/api/${endPoint}`, {
         method: method,
-        headers: {
+        headers: headers ? headers : {
             'Content-Type': 'application/json',
             'x-access-token': token,
         },
@@ -28,4 +29,12 @@ export const handleFetch = async ({ endPoint, method, body }) => {
     });
 
     return response;
+}
+
+export const FirstLetterUppercase = (string) => {
+    if (typeof string !== 'string' || string.lenght === 0) {
+        return string;
+    } else {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 }

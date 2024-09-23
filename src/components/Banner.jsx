@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../AuthContext';
+import { FirstLetterUppercase } from '../utils/helpers';
 
 export default function Banner() {
     const { userData } = useContext(AuthContext);
@@ -13,7 +14,7 @@ export default function Banner() {
                     <span className="text-white">
                         <p>Jornada de</p>
                         <p id="user-name" className="text-4xl font-bold">
-                            {userData ? userData.name : 'Erro'}
+                            {userData ? FirstLetterUppercase(userData.name) : 'Erro'}
                         </p>
                     </span>
 

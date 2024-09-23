@@ -17,7 +17,7 @@ export default function ContentHubPage() {
     const [message, setMessage] = useState(null);
     const [isLoading, setLoading] = useState(true);
     const { userData } = useContext(AuthContext);
-    const apiUrl = 'http://localhost:3000/api/common';
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
     //! Inicia carregamento primário
     useEffect(() => {
@@ -27,7 +27,7 @@ export default function ContentHubPage() {
     //! Carrega todos os videos
     const fetchAllVideos = async () => {
         try {
-            const response = await fetch(`${apiUrl}/video/all`);
+            const response = await fetch(`${baseUrl}/common/video/all`);
 
             if (response.ok) {
                 const data = await response.json();
@@ -52,7 +52,7 @@ export default function ContentHubPage() {
     //! Carrega comentário de um video específico
     const fetchVideoComments = async (videoid) => {
         try {
-            const response = await fetch(`${apiUrl}/video/comments/${videoid}`);
+            const response = await fetch(`${baseUrl}/common/video/comments/${videoid}`);
 
             if (response.ok) {
                 const data = await response.json();
@@ -85,7 +85,7 @@ export default function ContentHubPage() {
         setComment('');
 
         try {
-            const response = await fetch(`${apiUrl}/video/comment`, {
+            const response = await fetch(`${baseUrl}/common/video/comment`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: body,

@@ -57,7 +57,7 @@ export default function AccountPage() {
         const newPassword = formData.newPassword;
 
         try {
-            const response = await fetch('http://localhost:3000/api/auth/change-password', {
+            const response = await fetch('http://187.74.75.122:3000/api/auth/change-password', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

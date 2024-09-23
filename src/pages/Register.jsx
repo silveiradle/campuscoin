@@ -12,16 +12,19 @@ export default function LoginPage() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
     const navigate = useNavigate();
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
     const handleRegister = async (e) => {
         e.preventDefault();
+        setLoading(true);
 
         if (password !== passwordConfirm) {
+            setLoading(false);
             return setMessage('As senhas não coincidem');
         }
 
         try {
-            const response = await fetch('http://localhost:3001/api/auth/register', {
+            const response = await fetch(`${baseUrl}/api/auth/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -34,11 +37,14 @@ export default function LoginPage() {
             });
 
             if (response.ok) {
+                setLoading(false);
                 return navigate('/login');
             } else {
+                setLoading(false);
                 setMessage('Error ao se registrar');
             }
         } catch (error) {
+            setLoading(false);
             setMessage(error.message);
         }
     }

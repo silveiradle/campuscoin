@@ -4,6 +4,7 @@ import LoadingPage from './pages/Loading';
 
 const PrivateRoute = () => {
     const [isAuthenticated, setAuthenticated] = useState(null);
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -16,7 +17,7 @@ const PrivateRoute = () => {
         const verifyToken = async () => {
             try {
                 // Trocar de localhost para IP Publico
-                const response = await fetch('http://localhost:3000/api/auth/verify-token', {
+                const response = await fetch(`${baseUrl}/api/auth/verify-token`, {  // IP Publico ou Localhost
                     headers: {
                         'x-access-token': token,
                     },

@@ -24,7 +24,7 @@ function App() {
             <Route path='profile' element={<ProfilePage />} />
             <Route path='content-hub' element={<ContentHubPage />} />
             <Route path='journey-hub' element={<JourneyHubPage />} />
-            <Route path='journey/stages/:id' element={<JourneyPage />} />
+            <Route path='journey/:id' element={<JourneyPage />} />
           </Route>
         </Routes>
       </BrowserRouter>
