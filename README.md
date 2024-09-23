@@ -1,10 +1,6 @@
 # CampusCoin React.JS application
 
-
-
-
 ## Instruções
-
 
 ## Adicionar novo menu
 Vá até a pasta principal do projeto e abra o arquivo 'menu.js'. Após escolher onde será adicionado o novo menu, deve seguir o padrão:
@@ -15,3 +11,7 @@ icon: 'Icone do menu' (opcional, caso não queira icone, apenas remova essa linh
 
 Para consultar os icones, acesse: https://fontawesome.com/search?o=r&m=free&s=solid
 
+Para executar use: npm run dev
+
+PORTA do frontend: 5173
+PORTA do backend (api): 3000
